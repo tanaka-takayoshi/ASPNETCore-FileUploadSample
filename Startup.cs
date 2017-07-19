@@ -12,7 +12,10 @@ namespace FileUploadSample
         {
             // Angular's default header name for sending the XSRF token.
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
-
+            services.Configure<FormOptions>(x => {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
+            })
             services.AddMvc();
         }
         #endregion
